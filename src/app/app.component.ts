@@ -12,4 +12,8 @@ import {SidebarComponent} from "../components/sidebar/sidebar.component";
 })
 export class AppComponent {
   title = 'TemplateProject';
+
+  alerter(value: string) {
+    alert("Clicked on " + value)
+  }
 }

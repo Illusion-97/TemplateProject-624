@@ -1,20 +1,15 @@
 <!-- Wrapper -->
 <div id="wrapper">
-
   <!-- Main -->
   <div id="main">
     <div class="inner">
-
       <!-- Header -->
-      <app-header/>
-
+      <app-header [titre]="title"/>
       <!-- Banner -->
       <router-outlet/>
-
     </div>
   </div>
-
   <!-- Sidebar -->
-  <app-sidebar/>
+  <app-sidebar (more)="alerter($event)"/>
 </div>
 
