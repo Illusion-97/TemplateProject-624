@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
- @Input() search: string = ""
+  @Input() search: string = ""
   @Output() searchChange: EventEmitter<string> = new EventEmitter<string>()
 
   onInput(eventValue: Event) {

@@ -1,0 +1,10 @@
+<article>
+  <a [href]="post.href" class="image">
+      @if(post.src) {
+          <img src="assets/images/{{post.src}}" [alt]="post.alt"/>
+      } @else {
+          <h3>Article Sans Image</h3>
+      }
+  </a>
+  <p>{{ post.text }}</p>
+</article>

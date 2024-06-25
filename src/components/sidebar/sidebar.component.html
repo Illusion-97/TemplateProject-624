@@ -47,18 +47,25 @@
         <h2>Ante interdum</h2>
       </header>
       <div class="mini-posts">
-        <article>
-          <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        <!--<article>
+          <a [href]="href" class="image"><img src="assets/images/{{src}}" alt="{{alt}}" /></a>
+          &lt;!&ndash;          <a [href]="href" class="image"><img [src]="'assets/images/' + src" alt="{{alt}}" /></a>&ndash;&gt;
+          <p>{{text}}</p>
         </article>
         <article>
-          <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+          <a [href]="minipost1.href" class="image"><img src="assets/images/{{minipost1.src}}" alt="{{minipost1.alt}}" /></a>
+          <p>{{minipost1.text}}</p>
         </article>
         <article>
-          <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+          <a [href]="minipost3.href" class="image"><img src="assets/images/{{minipost3.src}}" alt="{{minipost3.alt}}" /></a>
+          <p>{{minipost3.text}}</p>
         </article>
+        -->
+        @for (post of miniposts; track i; let i = $index; let first = $first) {
+            <app-article [post]="post"></app-article>
+        } @empty {
+          <p>Pas d'articles</p>
+        }
       </div>
       <ul class="actions">
         <li><button (click)="afficher()" class="button">More</button></li>
