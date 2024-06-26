@@ -10,5 +10,9 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "register",
+    loadComponent: () => import("../views/register/register.component").then(m => m.RegisterComponent)
   }
 ];
