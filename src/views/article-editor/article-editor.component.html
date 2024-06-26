@@ -1,7 +1,7 @@
 <form [formGroup]="form" (submit)="onSubmit()">
   <label> Username :
-    <input [class.invalid]="isInvalid('username')" type="text" formControlName="username">
-    @if(isInvalid('username')) {
+    <input [class.invalid]="isInvalid('titre')" type="text" formControlName="titre">
+    @if(isInvalid('titre')) {
       <p>Username is required</p>
     }
   </label>
@@ -21,17 +21,7 @@
       <p>Password too short</p>
     }
   </label>
-  <label> Confirm Password :
-    <input [class.invalid]="isInvalid(confirmPassword)" type="password" [formControl]="confirmPassword">
-    @if(hasError(confirmPassword,"required")) {
-      <p>Password is required</p>
-    } @else if (hasError(confirmPassword,"minlength")) {
-      <p>Password too short</p>
-    }
-    Pristine : {{confirmPassword.pristine}} <br>
-    Touched : {{confirmPassword.touched}} <br>
-    Dirty : {{confirmPassword.dirty}}
-  </label>
-  <input type="submit" value="Enregistrer">
+  <input [disabled]="form.invalid" type="submit" value="Enregistrer">
 </form>
 {{jsonValue}}
+

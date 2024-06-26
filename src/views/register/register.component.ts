@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {FormUser, User} from "../../common/models/user";
+import {AbstractFormComponent} from "../../common/components/abstract-form-component";
 
 @Component({
   selector: 'app-register',
@@ -9,8 +10,8 @@ import {FormUser, User} from "../../common/models/user";
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
-  confirmPassword: FormControl = new FormControl<string>("")
+export class RegisterComponent extends AbstractFormComponent {
+  confirmPassword: FormControl = new FormControl<string>("", {validators: Validators.required})
 
   form: FormGroup = new FormGroup({
     id: new FormControl(0, {
@@ -27,34 +28,13 @@ export class RegisterComponent {
     })
   })
 
-  onSubmit() {
-    if(this.form.valid) this.save(this.form.value)
+  onSubmit$(): void {
+    console.log("User", this.form.value)
   }
 
-  save(user: User) {
-    console.log("User", user)
-  }
-
-  get jsonValue() {
-    return JSON.stringify(this.form.value)
-  }
-
-  getControl(control: AbstractControl | string) {
-    if (typeof control == "string") {
-      const found = this.form.get(control)
-      if (!found) throw new Error("Control introuvable")
-      return found
-    }
-    return control
-  }
-
-  isInvalid(control: AbstractControl | string) {
-    control = this.getControl(control)
-    return (control.touched || control.dirty) && control.invalid
-  }
-
-  hasError(name: string, errorCode: string) {
-    const control = this.getControl(name)
-    return (control.touched || control.dirty) && control.hasError(errorCode)
+  // 'override' n'est nécessaire que dans le cas ou la variable ou méthode de la classe parent n'est pas 'abstract'
+  override onSubmit() {
+    this.confirmPassword.markAsTouched()
+    super.onSubmit();
   }
 }
