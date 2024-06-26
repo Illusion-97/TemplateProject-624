@@ -24,9 +24,9 @@
   <label> Confirm Password :
     <input [class.invalid]="isInvalid(confirmPassword)" type="password" [formControl]="confirmPassword">
     @if(hasError(confirmPassword,"required")) {
-      <p>Password is required</p>
-    } @else if (hasError(confirmPassword,"minlength")) {
-      <p>Password too short</p>
+      <p>Confirm Password is required</p>
+    } @else if (hasError(confirmPassword,"mustmatch")) {
+      <p>Passwords not matching</p>
     }
     Pristine : {{confirmPassword.pristine}} <br>
     Touched : {{confirmPassword.touched}} <br>

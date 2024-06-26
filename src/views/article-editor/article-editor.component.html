@@ -1,24 +1,33 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-  <label> Username :
+  <label> Titre :
     <input [class.invalid]="isInvalid('titre')" type="text" formControlName="titre">
     @if(isInvalid('titre')) {
-      <p>Username is required</p>
+      <p>Titre is required</p>
     }
   </label>
-  <label> Email :
-    <input [class.invalid]="isInvalid('email')" type="email" formControlName="email">
-    @if(hasError('email','required')) {
-      <p>Email is required</p>
-    } @else if (hasError('email','email')) {
+  <label> Href :
+    <input [class.invalid]="isInvalid('href')" type="text" formControlName="href">
+    @if(hasError('href','required')) {
+      <p>Href is required</p>
+    } @else if (hasError('href','href')) {
       <p>Wrong format</p>
     }
   </label>
-  <label> Password :
-    <input [class.invalid]="isInvalid('password')" type="password" formControlName="password">
-    @if(hasError("password","required")) {
-      <p>Password is required</p>
-    } @else if (hasError("password","minlength")) {
-      <p>Password too short</p>
+  <label> Src :
+    <input type="text" formControlName="src">
+  </label>
+  <label> Alt :
+    <input [class.invalid]="isInvalid('alt')" type="text" formControlName="alt">
+    @if(isInvalid('alt')) {
+      <p>Alt is required</p>
+    }
+  </label>
+  <label> Text :
+    <textarea [class.invalid]="isInvalid('text')" rows="4" formControlName="text"></textarea>
+    @if(hasError("text","required")) {
+      <p>Text is required</p>
+    } @else if (hasError("text","minlength")) {
+      <p>Text too short</p>
     }
   </label>
   <input [disabled]="form.invalid" type="submit" value="Enregistrer">

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {SearchComponent} from "../search/search.component";
 import {NgForOf} from "@angular/common";
 import {ArticleComponent} from "./article/article.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,8 @@ import {ArticleComponent} from "./article/article.component";
   imports: [
     SearchComponent,
     NgForOf,
-    ArticleComponent
+    ArticleComponent,
+    RouterLink
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'

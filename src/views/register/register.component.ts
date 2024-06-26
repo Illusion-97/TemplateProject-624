@@ -11,7 +11,6 @@ import {AbstractFormComponent} from "../../common/components/abstract-form-compo
   styleUrl: './register.component.css'
 })
 export class RegisterComponent extends AbstractFormComponent {
-  confirmPassword: FormControl = new FormControl<string>("", {validators: Validators.required})
 
   form: FormGroup = new FormGroup({
     id: new FormControl(0, {
@@ -26,6 +25,10 @@ export class RegisterComponent extends AbstractFormComponent {
     email: new FormControl("", {
       validators: [Validators.required, Validators.email]
     })
+  })
+
+  confirmPassword: FormControl = new FormControl<string>("", {
+    validators: [Validators.required, this.mustMatch(this.getControl('password'))]
   })
 
   onSubmit$(): void {

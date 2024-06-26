@@ -1,5 +1,5 @@
 import {User} from "../models/user";
-import {AbstractControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 export abstract class AbstractFormComponent {
 
@@ -32,5 +32,15 @@ export abstract class AbstractFormComponent {
   hasError(name: AbstractControl | string, errorCode: string) {
     const control = this.getControl(name)
     return (control.touched || control.dirty) && control.hasError(errorCode)
+  }
+
+  mustMatch(matchingControl: AbstractControl): ValidatorFn {
+    return (control): ValidationErrors | null => {
+      return control.value === matchingControl.value
+        ? null
+        : { // Objet de type ValidationErrors
+        mustmatch: "Ne match pas" // errorCode : value
+      }
+    }
   }
 }
