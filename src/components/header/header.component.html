@@ -1,6 +1,6 @@
 <header id="header">
 <!--  <a href="{{ link }}" class="logo"><strong>{{ titre }}</strong> by HTML5 UP</a>-->
-  <a [href]="link" class="logo"><strong>{{ titre }}</strong> by HTML5 UP</a>
+  <a [href]="link" class="logo"><strong>{{ titre }}</strong> by {{service.currentUser?.username || 'Anonyme'}}</a>
   <ul class="icons">
     <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
     <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>

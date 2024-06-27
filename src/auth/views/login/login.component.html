@@ -12,7 +12,7 @@
            minlength="6"
            [(ngModel)]="password" #pass>
   </label>
-  <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
+  <input type="checkbox" id="remember" name="useLocal" [(ngModel)]="service.useLocal" ><label for="remember">Remember Me</label>
   <input [disabled]="!myForm.checkValidity()" type="submit" value="Enregistrer">
 </form>
 {{jsonValue}}

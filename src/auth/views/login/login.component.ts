@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -26,9 +28,15 @@ export class LoginComponent {
     this.password = value.password
   }
 
+
+  protected service: AuthService = inject(AuthService)
+  private router: Router = inject(Router)
+
   login(form: HTMLFormElement) {
     if(form.checkValidity())
-      console.log("CREDENTIALS : ",this.credentials)
+      this.service.login(this.credentials).subscribe(response => {
+        this.router.navigate(['/home'])
+      })
   }
 
   get jsonValue() {

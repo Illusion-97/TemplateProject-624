@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
 import {SearchComponent} from "../search/search.component";
 import {NgForOf} from "@angular/common";
 import {ArticleComponent} from "./article/article.component";
 import {RouterLink} from "@angular/router";
+import {AuthService} from "../../auth/services/auth.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -62,6 +63,8 @@ export class SidebarComponent {
     console.log("Click on More")
     this.more.emit("More")
   }
+
+  protected service: AuthService = inject(AuthService)
 }
 
 export interface MiniPost {

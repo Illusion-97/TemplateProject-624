@@ -13,9 +13,13 @@
       </header>
       <ul>
         <li><a routerLink="/home">Homepage</a></li>
-        <li><a routerLink="/editor/0">Nouvel Article</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Register</a></li>
+        @if (service.isLogged) {
+          <li><a routerLink="/editor/0">Nouvel Article</a></li>
+          <li><button (click)="service.logout()">Logout</button></li>
+        } @else {
+          <li><a routerLink="/auth/login">Login</a></li>
+          <li><a routerLink="/auth/register">Register</a></li>
+        }
       </ul>
     </nav>
 

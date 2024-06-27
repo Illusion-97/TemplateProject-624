@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import {HomeComponent} from "../views/home/home.component";
-import {LoginComponent} from "../views/login/login.component";
+import {LoginComponent} from "../auth/views/login/login.component";
+import {NotFoundComponent} from "../views/not-found/not-found.component";
+import {authGuard} from "../auth/services/auth.service";
 
 export const routes: Routes = [
   {
@@ -8,16 +10,31 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: "login",
-    component: LoginComponent
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full"
   },
   {
-    path: "register",
-    loadComponent: () => import("../views/register/register.component").then(m => m.RegisterComponent)
+    path: "auth",
+    loadChildren: () => import("../auth/auth.routes").then(m => m.routes)
   },
   {
-    // un segment d'URL précédé de ':' devient une variable
-    path: "editor/:id",
-    loadComponent: () => import("../views/article-editor/article-editor.component").then(m => m.ArticleEditorComponent)
+    path: "editor",
+    children: [
+      {
+        // un segment d'URL précédé de ':' devient une variable
+        path: ":id",
+        canActivate: [authGuard],
+        loadComponent: () => import("../views/article-editor/article-editor.component").then(m => m.ArticleEditorComponent)
+      },
+      {
+        path: "",
+        redirectTo: "0",
+        pathMatch: "prefix"
+      }]
+  },
+  {// Attention à toujours la garder en dernier
+    path: "**", // wildcard
+    component: NotFoundComponent
   }
 ];

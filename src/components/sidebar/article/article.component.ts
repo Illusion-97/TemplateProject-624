@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {MiniPost} from "../sidebar.component";
+import {AuthService} from "../../../auth/services/auth.service";
 
 @Component({
   selector: 'app-article',

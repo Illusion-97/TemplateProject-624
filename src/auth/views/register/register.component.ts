@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {FormUser, User} from "../../common/models/user";
-import {AbstractFormComponent} from "../../common/components/abstract-form-component";
+import {FormUser, User} from "../../../common/models/user";
+import {AbstractFormComponent} from "../../../common/components/abstract-form-component";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -31,8 +33,14 @@ export class RegisterComponent extends AbstractFormComponent {
     validators: [Validators.required, this.mustMatch(this.getControl('password'))]
   })
 
+  private service: AuthService = inject(AuthService)
+  private router: Router = inject(Router)
+
   onSubmit$(): void {
-    console.log("User", this.form.value)
+    this.service.register(this.form.value)
+      .subscribe({
+        next: () => this.router.navigate(['/auth/login'])
+      })
   }
 
   // 'override' n'est nécessaire que dans le cas ou la variable ou méthode de la classe parent n'est pas 'abstract'

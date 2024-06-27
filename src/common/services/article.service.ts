@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Article} from "../models/article";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -56,22 +58,25 @@ export class ArticleService {
       text: 'Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.'
     },
   ]
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  byId(id: number): Article | undefined {
-    return this.articles.find(article => article.id === id)
+  all(): Observable<Article[]> {
+    return this.http.get<Article[]>("http://localhost:3000/articles")
   }
 
-  save(article: Article) {
-    article.id = this.articles.length + 1
-    this.articles.push(article)
+  byId(id: number): Observable<Article> {
+    return this.http.get<Article>("http://localhost:3000/articles/" + id)
   }
 
-  update(article: Article) {
-    this.articles = [
-      ...this.articles.filter(a => article.id !== a.id),
-      article
-    ]
+  save(article: Article): Observable<Article> {
+    return this.http.post<Article>("http://localhost:3000/articles", article)
   }
 
+  update(article: Article): Observable<Article> {
+    return this.http.put<Article>("http://localhost:3000/articles/" + article.id, article)
+  }
+
+  delete(id: number): Observable<Article> {
+    return this.http.delete<Article>("http://localhost:3000/articles/" + id)
+  }
 }

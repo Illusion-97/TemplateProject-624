@@ -1,8 +1,11 @@
 <article>
   <a [href]="article.href" class="image"><img src="assets/images/{{article.src}}" [alt]="article.alt"/></a>
-  <h3>{{ article.titre }}</h3>
-  <p>{{ article.text }}</p>
-  <ul class="actions">
-    <li><a routerLink="/editor/{{article.id}}" class="button">Edit</a></li>
-  </ul>
+  <h3>{{ article.titre | titlecase }}</h3>
+  <p>{{ article.text | truncate}}</p>
+  @if(auth.isLogged){
+    <ul class="actions">
+      <li><a routerLink="/editor/{{article.id}}" class="button">Edit</a></li>
+      <li><button (click)="delete()" class="button primary">Supprimer</button></li>
+    </ul>
+  }
 </article>
