@@ -3,6 +3,7 @@ import {HomeComponent} from "../views/home/home.component";
 import {LoginComponent} from "../auth/views/login/login.component";
 import {NotFoundComponent} from "../views/not-found/not-found.component";
 import {authGuard} from "../auth/services/auth.service";
+import {articleResolver} from "../views/article-editor/article-editor.component";
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
         // un segment d'URL précédé de ':' devient une variable
         path: ":id",
         canActivate: [authGuard],
+        // indiquer des données à récupérer avant d'accéder à la page
+        resolve: {
+          article: articleResolver
+        },
         loadComponent: () => import("../views/article-editor/article-editor.component").then(m => m.ArticleEditorComponent)
       },
       {
