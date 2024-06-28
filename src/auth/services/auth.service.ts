@@ -4,6 +4,7 @@ import {Credentials} from "../views/login/login.component";
 import {User} from "../../common/models/user";
 import {BehaviorSubject, first, tap} from "rxjs";
 import {CanActivateFn, Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -35,15 +36,16 @@ export class AuthService {
 
   //POST http://localhost:3000/login
   login(credentials: Credentials) {
-    return this.http.post<AuthResponse>("http://localhost:3000/login",credentials)
+    return this.http.post<AuthResponse>(`/login`,credentials)
       .pipe(first(), tap(response => {
         this.currentResponse.next(response);
         (this.useLocal ? localStorage : sessionStorage).setItem("AUTH", JSON.stringify(response))
       }))
   }
+
   //POST http://localhost:3000/register
   register(user: User) {
-    return this.http.post<AuthResponse>("http://localhost:3000/register",user)
+    return this.http.post<AuthResponse>(`/register`,user)
   }
 
   private router: Router = inject(Router)
